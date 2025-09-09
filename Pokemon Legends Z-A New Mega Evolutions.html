@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Legends Z-A: Mega Evolutions</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+    }
+    header {
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2rem;
+      gap: 2rem;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      max-width: 350px;
+      padding: 1.5rem;
+      text-align: left;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 1rem;
+    }
+    .card h2 {
+      margin: 0.5rem 0;
+      font-size: 1.8rem;
+      color: #ffcc00;
+    }
+    .typing {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .type {
+      padding: 0.3rem 0.7rem;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+    .water { background: #3399ff; }
+    .dragon { background: #8b4de8; }
+    .grass { background: #78c850; }
+    .fairy { background: #ee99ac; }
+    .fire { background: #f08030; }
+    .fighting { background: #c03028; }
+    .description {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    footer {
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      background: rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pokémon Legends Z-A: Mega Evolutions</h1>
+    <p>Discover the newly revealed Mega Evolutions</p>
+  </header>
+
+  <div class="container">
+    <!-- Mega Feraligatr Card -->
+    <div class="card">
+      <img src="images/mega-feraligatr.png" alt="Mega Feraligatr">
+      <h2>Mega Feraligatr</h2>
+      <div class="typing">
+        <span class="type water">Water</span>
+        <span class="type dragon">Dragon</span>
+      </div>
+      <p class="description">
+        Mega Feraligatr gains a giant red crocodile head extension at the base of its neck that can rise upright, then snap or swing downward to shield its actual head. It develops three red spikes on each arm and larger spikes along its back.
+      </p>
+    </div>
+
+    <!-- Mega Meganium Card -->
+    <div class="card">
+      <img src="images/mega-meganium.png" alt="Mega Meganium">
+      <h2>Mega Meganium</h2>
+      <div class="typing">
+        <span class="type grass">Grass</span>
+        <span class="type fairy">Fairy</span>
+      </div>
+      <p class="description">
+        Mega Meganium has four poofy flowers around its neck, so that you can't see its neck at all, only its head sticking out of the topmost flower. The flowers from head to body are red, dark pink, light pink, and white, with white highlights for the red and pink flowers and red highlights for the white flower. The antennae are longer and have a loop near the top. It also gets fat, grassy fairy and its longer legs flare like pants over the white claws/feet.
+      </p>
+    </div>
+
+    <!-- Mega Emboar Card -->
+    <div class="card">
+      <img src="images/mega-emboar.png" alt="Mega Emboar">
+      <h2>Mega Emboar</h2>
+      <div class="typing">
+        <span class="type fire">Fire</span>
+        <span class="type fighting">Fighting</span>
+      </div>
+      <p class="description">
+        Mega Emboar is an ancient Chinese soldier, the fire around its head is much fancier and bigger, it has a black decoration sticking up behind its head. In one hand, it holds a spear of full fire pointed straight up and down.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Pokémon Legends Z-A Fan Project | Made with ❤️ for Trainers
+  </footer>
+</body>
+</html>
