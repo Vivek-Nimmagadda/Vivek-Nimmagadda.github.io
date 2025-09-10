@@ -15,41 +15,50 @@
     header {
       padding: 2rem;
       background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(5px);
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-    }
+  .buttons {
+    margin: 1rem 0;
+  }
+  .buttons button {
+    background: #ffcc00;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    margin: 0.5rem;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .buttons button:hover {
+    background: #ffaa00;
+    transform: scale(1.05);
+  }
+  .buttons button.active {
+    background: #ffaa00;
+    color: #222;
+    box-shadow: 0 0 10px rgba(255, 170, 0, 0.7);
+  }
     .container {
-      display: flex;
+      display: none; /* hidden by default */
       flex-wrap: wrap;
       justify-content: center;
       padding: 2rem;
       gap: 2rem;
     }
+    .container.active {
+      display: flex; /* show only active category */
+    }
     .card {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
       max-width: 350px;
       padding: 1.5rem;
       text-align: left;
-      transition: transform 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-10px);
     }
     .card img {
       width: 100%;
       border-radius: 15px;
       margin-bottom: 1rem;
-    }
-    .card h2 {
-      margin: 0.5rem 0;
-      font-size: 1.8rem;
-      color: #ffcc00;
     }
     .typing {
       display: flex;
@@ -69,39 +78,33 @@
     .fairy { background: #ee99ac; }
     .fire { background: #f08030; }
     .fighting { background: #c03028; }
-    .description {
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-    footer {
-      padding: 1rem;
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      background: rgba(0,0,0,0.5);
-    }
+    .normal { background: #a8a878; }
+    .electric { background: #f8d030; }
+    .ice { background: #98d8d8; }
+    .poison { background: #a040a0; }
+    .ground { background: #e0c068; }
+    .flying { background: #a890f0; }
+    .psychic { background: #f85888; }
+    .bug { background: #a8b820; }
+    .rock { background: #b8a038; }
+    .ghost { background: #705898; }
+    .dark { background: #705848; }
+    .steel { background: #b8b8d0; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Pokémon Legends Z-A: Mega Evolutions</h1>
-    <p>Discover the newly revealed Mega Evolutions</p>
+    <h1>Pokémon Mega Evolutions</h1>
+    <p>Discover the highly anticipated new Mega Evolutions for Pokémon Legends Z-A</p>
+    <div class="buttons">
+      <button onclick="showCategory('za')">Legends Z-A</button>
+      <button onclick="showCategory('charizard')">Obsidian Charizard</button>
+      <button onclick="showCategory('custom')">Custom Region</button>
+    </div>
   </header>
 
-  <div class="container">
-    <!-- Mega Feraligatr Card -->
-    <div class="card">
-      <img src="images/mega-feraligatr.png" alt="Mega Feraligatr">
-      <h2>Mega Feraligatr</h2>
-      <div class="typing">
-        <span class="type water">Water</span>
-        <span class="type dragon">Dragon</span>
-      </div>
-      <p class="description">
-        Mega Feraligatr gains a giant red crocodile head extension at the base of its neck that can rise upright, then snap or swing downward to shield its actual head. It develops three red spikes on each arm and larger spikes along its back.
-      </p>
-    </div>
-
-    <!-- Mega Meganium Card -->
+  <!-- Legends Z-A -->
+  <div id="za" class="container active">
     <div class="card">
       <img src="images/mega-meganium.png" alt="Mega Meganium">
       <h2>Mega Meganium</h2>
@@ -109,12 +112,11 @@
         <span class="type grass">Grass</span>
         <span class="type fairy">Fairy</span>
       </div>
-      <p class="description">
+      <p>
         Mega Meganium has four poofy flowers around its neck, so that you can't see its neck at all, only its head sticking out of the topmost flower. The flowers from head to body are red, dark pink, light pink, and white, with white highlights for the red and pink flowers and red highlights for the white flower. The antennae are longer and have a loop near the top. It also gets fat, grassy fairy and its longer legs flare like pants over the white claws/feet.
       </p>
     </div>
 
-    <!-- Mega Emboar Card -->
     <div class="card">
       <img src="images/mega-emboar.png" alt="Mega Emboar">
       <h2>Mega Emboar</h2>
@@ -122,14 +124,82 @@
         <span class="type fire">Fire</span>
         <span class="type fighting">Fighting</span>
       </div>
-      <p class="description">
+      <p>
         Mega Emboar is an ancient Chinese soldier, the fire around its head is much fancier and bigger, it has a black decoration sticking up behind its head. In one hand, it holds a spear of full fire pointed straight up and down.
+      </p>
+    </div>
+
+    <div class="card">
+      <img src="images/mega-feraligatr.png" alt="Mega Feraligatr">
+      <h2>Mega Feraligatr</h2>
+      <div class="typing">
+        <span class="type water">Water</span>
+        <span class="type dragon">Dragon</span>
+      </div>
+      <p>
+        Mega Feraligatr gains a giant red crocodile head extension at the base of its neck that can rise upright, then snap or swing downward to shield its actual head. It develops three red spikes on each arm and larger spikes along its back.
       </p>
     </div>
   </div>
 
+  <!-- Obsidian Charizard -->
+  <div id="charizard" class="container">
+    <div class="card">
+      <img src="images/obsidian-charizard.png" alt="Obsidian Charizard">
+      <h2>🌑 Obsidian Charizard</h2>
+      <div class="typing">
+        <span class="type fire">Fire</span>
+        <span class="type dark">Dark</span>
+      </div>
+      <h3>Design Description</h3>
+      <p>
+        Scales are darker, with glowing cracks like magma running across its wings and tail. Its wings are more tattered, shaped like volcanic rock with glowing red fissures. The flame on its tail burns black with a red core, symbolizing cursed fire. Eyes glow crimson, hinting at its adaptation to the eternal twilight of this region. Slightly slimmer, more menacing build—adapted for ambush hunting in the dark skies.
+      </p>
+      <h3>Region Theme</h3>
+      <p>
+        A volcanic but shadow-filled land where constant ash clouds block out sunlight.
+      </p>
+      <h3>Lore</h3>
+      <p>
+        Said to have absorbed the fury of endless eruptions, Obsidian Charizard’s fire is so intense it leaves behind shadows that burn like flame.
+      </p>
+      <h3>⚔️ Moveset Highlights</h3>
+      <p>
+        Infernal Wing (signature move): A wing strike cloaked in molten shadow.
+      </p>
+      <p>
+        Smokescreen → Shadow Veil (regional variant move): Instead of blocking vision, it cloaks the battlefield in dark fire, lowering enemy accuracy.
+      </p>
+      <p>
+        Flare Blitz, Dark Pulse, Heat Wave get boosted power due to its volcanic adaptation.
+      </p>
+    </div>
+  </div>
+
+  <!-- Custom Region -->
+  <div id="custom" class="container">
+    <div class="card">
+      <h2>Example Pokémon</h2>
+      <p>This is where you add custom region Pokémon later.</p>
+    </div>
+  </div>
+
   <footer>
-    &copy; 2025 Pokémon Legends Z-A Fan Project | Made with ❤️ for Trainers
+    &copy; 2025 Pokémon Fan Project | Made with ❤️ for Trainers around the world
   </footer>
+
+<script>
+  function showCategory(categoryId) {
+    // Hide all containers
+    document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+    // Show selected container
+    document.getElementById(categoryId).classList.add('active');
+
+    // Remove active class from all buttons
+    document.querySelectorAll('.buttons button').forEach(b => b.classList.remove('active'));
+    // Add active class to the clicked button
+    event.target.classList.add('active');
+  }
+</script>
 </body>
 </html>
