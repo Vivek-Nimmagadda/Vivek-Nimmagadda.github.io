@@ -84,6 +84,11 @@
       padding: 10px;
       width: 150px;
       text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .dex-entry:hover {
+      transform: scale(1.05);
     }
     .dex-entry img {
       width: 50px;
@@ -94,13 +99,13 @@
 </head>
 <body>
   <h1>Pokédex</h1>
+
   <input type="text" id="search" placeholder="Enter Pokémon name or ID" />
   <button onclick="loadForms()">Search</button>
 
   <!-- Generation Filter -->
   <select id="generation-filter" onchange="loadAllPokemon()">
-    <option value="all">All Generations</option>
-    <option value="1">Gen 1 (Kanto)</option>
+    <option value="1" selected>Gen 1 (Kanto)</option>
     <option value="2">Gen 2 (Johto)</option>
     <option value="3">Gen 3 (Hoenn)</option>
     <option value="4">Gen 4 (Sinnoh)</option>
@@ -109,6 +114,7 @@
     <option value="7">Gen 7 (Alola)</option>
     <option value="8">Gen 8 (Galar)</option>
     <option value="9">Gen 9 (Paldea)</option>
+    <option value="all">All Generations</option>
   </select>
 
   <div id="form-selector"></div>
@@ -116,6 +122,9 @@
   <div id="all-pokemon-list"></div>
 
   <script>
+    let formsData = [];
+    let currentFormName = '';
+    let currentRegion = '';
 
     const generationRanges = {
       1: [1, 151],      // Kanto
@@ -126,12 +135,8 @@
       6: [650, 721],    // Kalos
       7: [722, 809],    // Alola
       8: [810, 905],    // Galar
-      9: [906, 1025]    // Paldea (up to current limit)
+      9: [906, 1025]    // Paldea
     };
-
-    let formsData = [];
-    let currentFormName = '';
-    let currentRegion = '';
 
     async function loadForms() {
       const nameOrId = document.getElementById('search').value.toLowerCase().trim();
@@ -243,7 +248,10 @@
         const form = await findMatchingForm(link.species.name);
         const pokemonResponse = await fetch(form.pokemon.url);
         const pokemonData = await pokemonResponse.json();
-        return `<div style="display:inline-block;text-align:center;"><img class="evo-img" src="${pokemonData.sprites.front_default}" alt="${form.pokemon.name}" /><br>${form.pokemon.name.toUpperCase().replace(/-/g, ' ')}</div>`;
+        return `<div style="display:inline-block;text-align:center;cursor:pointer;" onclick="getPokemon('${form.pokemon.name}')">
+                  <img class="evo-img" src="${pokemonData.sprites.front_default}" alt="${form.pokemon.name}" />
+                  <br>${form.pokemon.name.toUpperCase().replace(/-/g, ' ')}
+                </div>`;
       }
 
       let current = chain;
@@ -267,7 +275,7 @@
       const data = await response.json();
       const entries = data.results;
 
-      // Determine selected generation
+      // Use selected generation
       const genSelect = document.getElementById("generation-filter").value;
       let min = 1, max = 1025;
       if (genSelect !== "all") {
@@ -287,7 +295,6 @@
           <img src="${pokeData.sprites.front_shiny}" alt="Shiny ${pokeData.name}" />
         `;
 
-        entryDiv.style.cursor = "pointer";
         entryDiv.onclick = () => {
           document.getElementById("search").value = pokeData.name;
           getPokemon(pokeData.name);
@@ -298,41 +305,11 @@
       }
     }
 
-    window.onload = loadAllPokemon;
-
-  async function getMatchingEvolutionChain(currentName, chain) {
-    const segments = [];
-
-    async function findMatchingForm(name) {
-      const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}`);
-      const speciesData = await speciesResponse.json();
-      return speciesData.varieties.find(v => v.pokemon.name === currentFormName) || speciesData.varieties[0];
-    }
-
-    async function buildChainLink(link) {
-      const form = await findMatchingForm(link.species.name);
-      const pokemonResponse = await fetch(form.pokemon.url);
-      const pokemonData = await pokemonResponse.json();
-      return `<div style="display:inline-block;text-align:center;cursor:pointer;" onclick="getPokemon('${form.pokemon.name}')">
-                <img class="evo-img" src="${pokemonData.sprites.front_default}" alt="${form.pokemon.name}" />
-                <br>${form.pokemon.name.toUpperCase().replace(/-/g, ' ')}
-              </div>`;
-    }
-
-    let current = chain;
-    while (current) {
-      segments.push(await buildChainLink(current));
-      if (current.evolves_to.length > 0) {
-        current = current.evolves_to[0];
-      } else {
-        break;
-      }
-    }
-
-    return segments.join(' → ');
-  }
-
-    window.onload = loadAllPokemon;
+    // Auto-load Gen 1 on page start
+    window.onload = () => {
+      document.getElementById("generation-filter").value = "1";
+      loadAllPokemon();
+    };
   </script>
 </body>
 </html>
